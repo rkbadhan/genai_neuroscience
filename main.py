@@ -119,7 +119,7 @@ class SimpleMCTS:
             
             if response_format:
                 response = self.client.beta.chat.completions.parse(
-                    model=settings.model_name,
+                    model=model_name,
                     messages=messages,
                     response_format=response_format,
                     temperature=settings.temperature,
