@@ -28,12 +28,9 @@ class Settings(BaseSettings):
     temperature: float = 0.8
     max_tokens: int = 1024
     
-    model_config = SettingsConfigDict(
-        arbitrary_types_allowed=True,
-        env_file=".env"
-    )
+    model_config = SettingsConfigDict(arbitrary_types_allowed=True)
 
-settings = Settings(
+settings = Settings()
 
 
 class Eval(BaseModel):
@@ -317,12 +314,16 @@ def create_interface():
 
     return interface
 
+# Create the interface
+interface = create_interface()
+app = interface.app  # This exposes the underlying FastAPI app for gunicorn
+
 if __name__ == "__main__":
+    # This block is only for local development
     port = int(os.environ.get("PORT", 8080))
-    interface = create_interface()
     interface.launch(
         server_name="0.0.0.0",
         server_port=port,
-        allowed_paths=["logs", "data"],  # Allow access to our data directories
-        show_error=True  # This helps with debugging
-    ))
+        allowed_paths=["logs", "data"],
+        show_error=True
+    )

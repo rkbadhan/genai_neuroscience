@@ -10,9 +10,11 @@ RUN apt-get update && apt-get install -y \
 
 # Copy requirements first for better caching
 COPY requirements.txt .
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy the rest of the application
 COPY . .
 
 # Create necessary directories
@@ -21,6 +23,5 @@ RUN mkdir -p logs data/queries data/feedback
 # Set environment variables
 ENV PORT=8080
 
-# Run the application
-CMD exec python main.py
-
+# Command to run the application
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
