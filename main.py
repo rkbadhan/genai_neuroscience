@@ -18,21 +18,23 @@ from tenacity.before_sleep import before_sleep_log
 from fastapi import FastAPI
 from openai import OpenAI
 
-
-
-
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+from openai import OpenAI
+import os
+# os.environ['OPENAI_API_KEY'] ="sk-Vy2IMkQku5bzY7zmbVT0Y1XZmsnOz5EanFqB3s5IgST3BlbkFJkHGcg7Dt1pJD1BWUIkx4Lh26Lwfwp5xlnm_hufF0AA"
+os.environ['OPENAI_API_KEY'] ="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"
+client = OpenAI()
+model_name="gpt-4o"
+
 # Configuration and Models
 class Settings(BaseSettings):
-    openai_api_key: str = "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"
-    model_name: str = "gpt-4o"  # Fixed typo from "gpt-4o"
+    # model_name: str = model_name  # Fixed typo from "gpt-4o"
     max_iterations: int = 2
     temperature: float = 0.8
     max_tokens: int = 1024
-    
     model_config = SettingsConfigDict(arbitrary_types_allowed=True)
 
 settings = Settings()
