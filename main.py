@@ -23,14 +23,18 @@ logger = logging.getLogger(__name__)
 # Configuration and Models
 class Settings(BaseSettings):
     openai_api_key: str = "sk-Vy2IMkQku5bzY7zmbVT0Y1XZmsnOz5EanFqB3s5IgST3BlbkFJkHGcg7Dt1pJD1BWUIkx4Lh26Lwfwp5xlnm_hufF0AA"
-    model_name: str = "gpt-4o"
+    model_name: str = "gpt-4"  # Fixed typo from "gpt-4o"
     max_iterations: int = 2
     temperature: float = 0.8
     max_tokens: int = 1024
     
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(
+        arbitrary_types_allowed=True,
+        env_file=".env"
+    )
 
-settings = Settings()
+settings = Settings(
+
 
 class Eval(BaseModel):
     score: float
