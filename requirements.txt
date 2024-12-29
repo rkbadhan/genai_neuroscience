@@ -1,7 +1,7 @@
-gradio==4.12.0
+gradio==5.9.1
 openai==1.8.0
 pydantic==2.10.3
 python-dotenv==1.0.0
 tenacity==8.2.3
-pydantic-settings==2.1.0
+pydantic-settings==2.7.0
 gunicorn==20.1.0
