@@ -22,8 +22,8 @@ logger = logging.getLogger(__name__)
 
 # Configuration and Models
 class Settings(BaseSettings):
-    openai_api_key: str = os.getenv('OPENAI_API_KEY', '')
-    model_name: str = "gpt-4"
+    openai_api_key: str = "sk-Vy2IMkQku5bzY7zmbVT0Y1XZmsnOz5EanFqB3s5IgST3BlbkFJkHGcg7Dt1pJD1BWUIkx4Lh26Lwfwp5xlnm_hufF0AA"
+    model_name: str = "gpt-4o"
     max_iterations: int = 2
     temperature: float = 0.8
     max_tokens: int = 1024
