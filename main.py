@@ -316,4 +316,9 @@ def create_interface():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     interface = create_interface()
-    interface.launch(server_name="0.0.0.0", server_port=port)
+    interface.launch(
+        server_name="0.0.0.0",
+        server_port=port,
+        allowed_paths=["logs", "data"],  # Allow access to our data directories
+        show_error=True  # This helps with debugging
+    ))
