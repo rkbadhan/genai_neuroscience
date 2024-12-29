@@ -91,7 +91,14 @@ class SimpleMCTS:
     def __init__(self, problem: str, max_iterations: Optional[int] = None):
         self.problem = problem
         self.max_iterations = max_iterations or settings.max_iterations
-        self.client = openai.OpenAI(api_key=settings.openai_api_key)
+        try:
+            self.client = OpenAI(
+                api_key=settings.openai_api_key,
+                # Remove any proxy configuration if it exists
+            )
+        except Exception as e:
+            logger.error(f"Failed to initialize OpenAI client: {str(e)}")
+            raise
         self.root: Optional[Node] = None
         self.logger = logging.getLogger(__name__)
 
