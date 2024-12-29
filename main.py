@@ -28,12 +28,9 @@ class Settings(BaseSettings):
     temperature: float = 0.8
     max_tokens: int = 1024
     
-    model_config = SettingsConfigDict(
-        arbitrary_types_allowed=True,
-        env_file=".env"
-    )
+    model_config = SettingsConfigDict(arbitrary_types_allowed=True)
 
-settings = Settings(
+settings = Settings()
 
 
 class Eval(BaseModel):
