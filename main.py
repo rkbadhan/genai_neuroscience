@@ -16,6 +16,8 @@ from tenacity.after import after_log
 from tenacity.before import before_log
 from tenacity.before_sleep import before_sleep_log
 from fastapi import FastAPI
+from openai import OpenAI
+
 
 
 
