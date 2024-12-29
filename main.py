@@ -22,15 +22,19 @@ logger = logging.getLogger(__name__)
 
 # Configuration and Models
 class Settings(BaseSettings):
-    openai_api_key: str = "sk-Vy2IMkQku5bzY7zmbVT0Y1XZmsnOz5EanFqB3s5IgST3BlbkFJkHGcg7Dt1pJD1BWUIkx4Lh26Lwfwp5xlnm_hufF0AA"
-    model_name: str = "gpt-4o"
+    openai_api_key: str = "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"
+    model_name: str = "gpt-4"  # Fixed typo from "gpt-4o"
     max_iterations: int = 2
     temperature: float = 0.8
     max_tokens: int = 1024
     
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(
+        arbitrary_types_allowed=True,
+        env_file=".env"
+    )
 
-settings = Settings()
+settings = Settings(
+
 
 class Eval(BaseModel):
     score: float
@@ -316,4 +320,9 @@ def create_interface():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     interface = create_interface()
-    interface.launch(server_name="0.0.0.0", server_port=port)
+    interface.launch(
+        server_name="0.0.0.0",
+        server_port=port,
+        allowed_paths=["logs", "data"],  # Allow access to our data directories
+        show_error=True  # This helps with debugging
+    ))
