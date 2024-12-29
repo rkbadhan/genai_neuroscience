@@ -122,15 +122,15 @@ class SimpleMCTS:
                     model=model_name,
                     messages=messages,
                     response_format=response_format,
-                    temperature=settings.temperature,
-                    max_tokens=settings.max_tokens,
+                    temperature=0.8,
+                    max_tokens=1024,
                 )
             else:
                 response = self.client.chat.completions.create(
-                    model=settings.model_name,
+                    model=model_name,
                     messages=messages,
-                    temperature=settings.temperature,
-                    max_tokens=settings.max_tokens,
+                    temperature=0.8,
+                    max_tokens=1024,
                 )
             return response.choices[0].message.content
         except Exception as e:
