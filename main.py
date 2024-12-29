@@ -315,8 +315,15 @@ def create_interface():
     return interface
 
 # Create the interface
+# At the end of your file, modify the app exposure:
 interface = create_interface()
-app = interface.app  # This exposes the underlying FastAPI app for gunicorn
+
+# Instead of directly exposing the app property, wrap it properly:
+app = gr.mount_gradio_app(
+    FastAPI(), 
+    interface, 
+    path="/"
+)
 
 if __name__ == "__main__":
     # This block is only for local development
